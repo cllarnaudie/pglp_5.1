@@ -1,28 +1,37 @@
 package main.java;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-/**
- * classe immuable donc final devant classe 
- * une classe immuable est une classe dont les instances sont immuables par conception et implémentation
- * c est une classe dont les instances ne peuvent pas etre modifiees apres implementation
- * */
-public final class Personnel implements Composant{
+
+
+public final class Personnel implements Composant, Serializable{
 	
     private final String nom;
 	private final String prenom; 
-	private final String fonction; 
-	private final LocalDate dateNaissance; 
-	private final ArrayList <String> numeroTelephone; 
+	private final   String fonction; 
+	private final    LocalDate dateNaissance; 
+	private final    ArrayList <String> numeroTelephone; 
 	
-	public  static class Builder  {
-	    private  String nom;
-		private  String prenom; 
-		private  String fonction; 
-		private  LocalDate dateNaissance; 
-		private  ArrayList <String> numeroTelephone; 
+	private static final long serialVersionUID = 150;
+	
+	
+	public  static  class Builder  {
+	    private   String  nom;
+		private    String prenom; 
+		private   String fonction; 
+		private    LocalDate dateNaissance; 
+		private    ArrayList <String> numeroTelephone; 
 	
 	public Builder (String nom, String prenom){
 
@@ -89,6 +98,105 @@ public final class Personnel implements Composant{
 	
 	
 	
+	/**
+	 * Serialisation 
+	 * @param personne
+	 * @param fichier
+	 */
+	public void writePersonnel (String nomFichier) {
+		
+		ObjectOutputStream oos=null ;
+		try {
+		File fichier =  new File(nomFichier) ;
+		FileOutputStream file = new FileOutputStream(fichier);
+		
+		 // ouverture d'un flux sur un fichier
+		/*
+		oos =  new ObjectOutputStream(
+				//new BufferedOutputStream(
+					new FileOutputStream(fichier)) ;*/
+		
+		// ouverture d'un flux sur un fichier
+		oos =  new ObjectOutputStream(
+				//new BufferedOutputStream(
+						file) ;
+				
+		 // sérialization de l'objet
+		oos.writeObject(this) ;
+		
+		oos.close();
+		file.close();
+		
+		}
+		catch (IOException ex) {
+			System.out.println(ex);
+		}
+		
+	}
+	
+	
+	/**
+	 * Deserialisation
+	 * @param personne
+	 * @param fichier
+	 */
+	public Personnel readPersonnel ( String  nomFichier) {
+		Personnel m = null;
+		try {
+		File fichier =  new File(nomFichier) ;
+		FileInputStream file = new FileInputStream(fichier);
+		
+		// ouverture d'un flux sur un fichier
+		/*ObjectInputStream ois =  new ObjectInputStream(
+				new BufferedInputStream(
+				new FileInputStream(fichier)) );*/
+		// ouverture d'un flux sur un fichier
+				ObjectInputStream ois =  new ObjectInputStream(
+						new BufferedInputStream(
+						file));
+				
+		 // désérialization de l'objet
+		m = (Personnel)ois.readObject() ;
+		System.out.println(m) ;
+		
+		ois.close();
+		file.close();
+		
+		}
+		catch (IOException ex) {
+			System.out.println(ex);
+		}
+		catch (ClassNotFoundException ey) {
+			System.out.println(ey);
+		}
+	
+		
+		return m ;
+	}
+	
+	
+	
+	 /**
+	    * 
+	    * @param oos
+	    * @throws IOException
+	    */
+	    
+	
+	    private  void writeObject(ObjectOutputStream oos)
+	    throws IOException {
+
+	       // écriture  
+	      oos.writeUTF(nom) ;
+	      oos.writeUTF(prenom) ;
+	      oos.writeUTF(fonction) ;
+	      oos.writeUTF(dateNaissance.toString()) ;
+	      
+	      for (int i=0 ; i < numeroTelephone.size(); i++) {
+	    	  oos.writeUTF(numeroTelephone.get(i));
+	      }
+	       
+	   }
 	
 }
 

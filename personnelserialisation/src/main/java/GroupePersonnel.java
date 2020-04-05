@@ -2,10 +2,8 @@ package main.java;
 import java.util.ArrayList; 
 
 
-
 public  class GroupePersonnel {
 
-	// liste de personnel
 	private ArrayList <Personnel> personnels; 
 	
 	public GroupePersonnel() {
