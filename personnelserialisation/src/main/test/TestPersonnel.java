@@ -18,12 +18,13 @@ public class TestPersonnel {
 	private static final String TELEPHONE1 = new String("0130857496");
 	private static final String TELEPHONE2 = new String("0130857496");
 	
-	private static final String NOM1 = new String("Strick");
-	private static final String PRENOM1 = new String("Cormorran");
+	private  final String NOM1 = new String("Strick");
+	private  final String PRENOM1 = new String("Cormorran");
 	
 	private static final String NOM_VIDE = new String(" ");
 	private static final String PRENOM2 = new String("Robin");
 	
+	/*
 	private static final String NOM3 = new String("Desmoulins");
 	private static final String PRENOM_VIDE = new String(" ");
 	
@@ -31,13 +32,13 @@ public class TestPersonnel {
 	private static final String PRENOM4 = new String("Toto ");
 	
 	private static final String NOM5 = new String("Polochon");
-	private static final String PRENOM5 = new String("Sebastien ");
+	private static final String PRENOM5 = new String("Sebastien ");*/
 
 	
  	@Test
-	public void testpersonnel() {
+	public void testwritePersonnel ()  {
 
-		System.out.println("testpersonnel");
+		System.out.println("testwritePersonnel");
 		System.out.println("\n");
 
 	    Personnel perso = new Personnel.Builder (NOM1, PRENOM1)	    		
@@ -49,14 +50,17 @@ public class TestPersonnel {
 	    
 		System.out.println(perso.getPrenom() + " " + perso.getNom() + " " + perso.getDateNaissance() +
 				" "+ perso.getFonction()+ " " + perso.getNumeroTelephone() + "\n" );
-		System.out.println("\n");	    		 	 
+		System.out.println("\n");	 
+		
+		// perso.writePersonnel (perso, "tutu"); 
+		perso.writePersonnel ("tutu"); 
 }
  	
- 	
+ 
  	@Test
-	public void testpersonnelNomInvalide() {
+	public void testreadPersonnel () {
 
-		System.out.println("testpersonnelNomInvalide");
+		System.out.println("testreadPersonnel");
 		System.out.println("\n");
 
 	    Personnel perso2 = new Personnel.Builder (NOM_VIDE, PRENOM2)	    		
@@ -70,10 +74,12 @@ public class TestPersonnel {
 				" "+ perso2.getFonction()+ " " + perso2.getNumeroTelephone()  + "\n");
 	
 	    
-      System.out.println ("Le nom est vide "+  NOM_VIDE.isEmpty() + "\n"); 
-		    		 	 
+      System.out.println ("Le nom est vide "+  NOM_VIDE.isEmpty() + "\n");
+      
+      perso2.readPersonnel("tutu"); 
+		 		 	 
 }
- 	
+ 	/*
  	@Test
 	public void testpersonnelPrenomInvalide() {
 
@@ -151,5 +157,5 @@ public class TestPersonnel {
 				" "+ perso6.getFonction()+ " " + perso6.getNumeroTelephone()  + "\n" );
 		
        	}
-	   	    		 	 
+	   	  */  		 	 
 }
