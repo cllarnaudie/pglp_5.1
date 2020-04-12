@@ -4,45 +4,44 @@ import main.java.Personnel.Builder;
 
 public class Main {
 
-	private static Main INSTANCE; 
+	private static Main instance; 
 
 	private Main() {
 
 	}
 
-	public static Main getInstance () {
-		if (INSTANCE == null) {
-			INSTANCE = new Main(); 
+	public static Main getInstance() {
+		if (instance == null) {
+			instance = new Main(); 
 		}
-		return INSTANCE; 
+		return instance; 
 	}
 
-	public static void main (String [] args) {
+	public static void main(String[] args) {
 
 		/** premier scenario serialisation personne*/
-		Personnel perso = new Builder("Cormorran","Strike")
+		Personnel perso = new Builder("Cormorran", "Strike")
 				.fonction("dectetive")
 				.numeroTelephone("0213456")
 				.numeroTelephone("01020304")
-				.build() ; 
-
+				.build(); 
 
 		perso.affichePersonnel();
 
 		perso.serialisationFichier("tutu");
 
-		System.out.println("\nTest de Deserialisation") ;
+		System.out.println("\nTest de Deserialisation");
 
 		perso.deserialisationFichier("tutu");
 		/** fin premier scenario  serialisation personne*/
 
 
 		/** deuxieme scenario serialisation personne gson*/
-		Personnel perso2 = new Builder("Robin","Ellacot")
+		Personnel perso2 = new Builder("Robin", "Ellacot")
 				.fonction("assitante-dectetive")
 				.numeroTelephone("123456789")
 				.numeroTelephone("13245896")
-				.build() ; 
+				.build(); 
 
 		perso2.affichePersonnel();
 
@@ -50,7 +49,7 @@ public class Main {
 
 		System.out.println(jsonString);
 
-		System.out.println("\nTest de Deserialisation avec Json") ;
+		System.out.println("\nTest de Deserialisation avec Json");
 
 		Personnel elt = perso.deSerialisationJson(jsonString);
 
@@ -60,7 +59,7 @@ public class Main {
 
 
 		/** premier scenario serialisation groupe*/
-		GroupePersonnel gp = new GroupePersonnel ();  	
+		GroupePersonnel gp = new GroupePersonnel();  	
 		Personnel p1 = new Personnel.Builder("Gertrude", "Germaine")
 				.build(); 
 		Personnel p2 = new Personnel.Builder("Gribouille", "Larnaudie")
@@ -73,16 +72,15 @@ public class Main {
 
 		gp.serialisationFichier("tutu");
 
-		System.out.println("\nTest de Deserialisation") ;
+		System.out.println("\nTest de Deserialisation");
 
 		gp.deserialisationFichier("tutu");
 		/** fin premier scenario  serialisation groupe*/
 
 
-
 		/** deuxieme scenario serialisation groupe gson*/
 
-		GroupePersonnel gp2 = new GroupePersonnel ();  	
+		GroupePersonnel gp2 = new GroupePersonnel();  	
 		Personnel p3 = new Personnel.Builder("Camille", "Desmoulins")
 				.build(); 
 		Personnel p4 = new Personnel.Builder("Robin", "Ellacot")
@@ -97,7 +95,7 @@ public class Main {
 
 		System.out.println(jsonString2);
 
-		System.out.println("\nTest de Deserialisation avec Json") ;
+		System.out.println("\nTest de Deserialisation avec Json");
 
 		GroupePersonnel elt2 = gp2.deSerialisationJson(jsonString2);
 
