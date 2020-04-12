@@ -24,7 +24,7 @@ public class TestPersonnel {
 	    /**serialisation*/
 	    perso.serialisationFichier("tutu");
 	    
-	    System.out.println("Test de Deserialisation") ;
+	    System.out.println("Test de Deserialisation");
 	    
 	    Personnel res = perso.deserialisationFichier("tutu");
 	    
@@ -56,7 +56,7 @@ public class TestPersonnel {
 	    
 	    System.out.println(jsonString);
 	    
-	    System.out.println("Test de Deserialisation avec Json") ;
+	    System.out.println("Test de Deserialisation avec Json");
 	    
 	    Personnel elt = perso.deSerialisationJson(jsonString);
 	    

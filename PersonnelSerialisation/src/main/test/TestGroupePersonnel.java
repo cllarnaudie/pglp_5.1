@@ -10,7 +10,6 @@ public class TestGroupePersonnel {
 	@Test
 	public void testSerialisationDeserialisation() {
 
-
 		System.out.println("\n Test de sérialisation");
 
 		GroupePersonnel gp = new GroupePersonnel ();  	
@@ -29,7 +28,7 @@ public class TestGroupePersonnel {
 		/**serialisation*/
 		gp.serialisationFichier("tutu");
 
-		System.out.println("\nTest de Deserialisation") ;
+		System.out.println("\nTest de Deserialisation");
 
 		GroupePersonnel res = gp.deserialisationFichier("tutu");
 
@@ -38,7 +37,6 @@ public class TestGroupePersonnel {
 		if (res != null) {
 			res.afficheGroupePersonnel();
 		}
-
 	}
 
 
@@ -47,7 +45,7 @@ public class TestGroupePersonnel {
 
 		System.out.println("\n Test de sérialisation en json");
 
-		GroupePersonnel gp = new GroupePersonnel ();  	
+		GroupePersonnel gp = new GroupePersonnel();  	
 		Personnel p1 = new Personnel.Builder("Camille", "Desmoulins")
 				.build(); 
 		Personnel p2 = new Personnel.Builder("Robin", "Ellacot")
@@ -66,7 +64,7 @@ public class TestGroupePersonnel {
 
 		System.out.println(jsonString);
 
-		System.out.println("Test de Deserialisation avec Json") ;
+		System.out.println("Test de Deserialisation avec Json");
 
 		GroupePersonnel elt = gp.deSerialisationJson(jsonString);
 

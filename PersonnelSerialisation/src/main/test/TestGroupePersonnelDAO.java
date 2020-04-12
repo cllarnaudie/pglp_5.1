@@ -11,7 +11,7 @@ import main.java.dao.GroupePersonnelDAO;
 
 public class TestGroupePersonnelDAO {
 
-	String nomFichier = "fichierGroupePersonnel" ;
+	String nomFichier = "fichierGroupePersonnel";
 	private GroupePersonnel gp1 = null;
 	private GroupePersonnel gp2 = null;
 	private GroupePersonnel gp3 = null;
@@ -23,8 +23,8 @@ public class TestGroupePersonnelDAO {
 
 
 	@Before 
-	public void init () {
-		gp1 = new GroupePersonnel ();  	
+	public void init() {
+		gp1 = new GroupePersonnel();  	
 		p1 = new Personnel.Builder("Gertrude", "Germaine").fonction("chef")
 				.build(); 
 		p2 = new Personnel.Builder("Gribouille", "Larnaudie").fonction("chef")
@@ -32,7 +32,7 @@ public class TestGroupePersonnelDAO {
 		gp1.ajouter_personnel(p1);
 		gp1.ajouter_personnel(p2);
 
-		gp2 = new GroupePersonnel ();  	
+		gp2 = new GroupePersonnel();  	
 		p3 = new Personnel.Builder("Camille", "Desmoulins").fonction("souschef")
 				.build(); 
 		p4= new Personnel.Builder("Robin", "Ellacot").fonction("souschef")
@@ -41,7 +41,7 @@ public class TestGroupePersonnelDAO {
 		gp2.ajouter_personnel(p4);
 
 
-		gp3 = new GroupePersonnel ();  	
+		gp3 = new GroupePersonnel();  	
 		p5 = new Personnel.Builder("Gert", "Germaine").fonction("chef")
 				.build(); 
 
@@ -55,9 +55,7 @@ public class TestGroupePersonnelDAO {
 
 		DAOFactory.getGroupePersonnelDAO(nomFichier).create(gp1);
 
-
 		DAOFactory.getGroupePersonnelDAO(nomFichier).create(gp2);
-
 
 		/**affichage du fichier du groupe de personnels*/
 		GroupePersonnelDAO.getInstance(nomFichier).afficheFichierGroupePersonnels();
@@ -75,7 +73,6 @@ public class TestGroupePersonnelDAO {
 
 		System.out.println("\n affichage apres  suppression du personnel");
 		DAOFactory.getGroupePersonnelDAO(nomFichier).delete(gp2);
-
 
 		/**affichage du fichier des personnels*/
 		GroupePersonnelDAO.getInstance(nomFichier).afficheFichierGroupePersonnels(); 
@@ -112,14 +109,12 @@ public class TestGroupePersonnelDAO {
 
 		System.out.println("\n Test de mise à jours de groupe de personnel dans la table");
 
-
 		/**mise a jour - groupe personnel déjà existant dans la table
 		    gp3 remplace gp1*/
 		DAOFactory.getGroupePersonnelDAO(nomFichier).update(gp3);
 
 
-
-		/**affichage du fichier du groupe de personnels*/
+      	/**affichage du fichier du groupe de personnels*/
 		GroupePersonnelDAO.getInstance(nomFichier).afficheFichierGroupePersonnels();
 	}
 
