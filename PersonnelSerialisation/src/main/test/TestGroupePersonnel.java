@@ -1,6 +1,5 @@
 package main.test;
 
-
 import org.junit.Test;
 import main.java.GroupePersonnel;
 import main.java.Personnel;
