@@ -7,8 +7,7 @@ package main.java.dao;
  * @param <T>
  */
 public abstract class DAO <T>{
-	//protected Connection connect = /* */;
-
+	
 	/**creation*/
 	public abstract T create (T obj) ;
 
