@@ -10,12 +10,12 @@ import main.java.GroupePersonnel;
  */
 public class DAOFactory {
 	
-	public static DAO <Personnel> getPersonnelDAO(String nomFichier) {
+	public static DAO<Personnel> getPersonnelDAO(String nomFichier) {
 		
 		return PersonnelDAO.getInstance(nomFichier);
 	}
 	
-	public static DAO <GroupePersonnel> getGroupePersonnelDAO(String nomFichier) {
+	public static DAO<GroupePersonnel> getGroupePersonnelDAO(String nomFichier) {
 		
 		return GroupePersonnelDAO.getInstance(nomFichier);
 	}

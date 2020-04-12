@@ -12,35 +12,34 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
 import main.java.GroupePersonnel;
 
 
-public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
+public class GroupePersonnelDAO extends DAO<GroupePersonnel> {
 
 	/**instance de classe singleton*/
 	private static GroupePersonnelDAO instance;  
 
 	/**Table de hachage de groupe personnels avec pour cle : fonction*/
-	private static Map <String, GroupePersonnel> mapGroupePersonnels ; 
+	private static Map<String, GroupePersonnel> mapGroupePersonnels; 
 
 
 	/**nom du fichier contenant le groupe personnels*/
-	private static String nomFichierGroupePersonnel ; 
+	private static String nomFichierGroupePersonnel; 
 
 
 	/**
 	 * Constructeur prive pour une classe singleton
 	 */
 
-	private GroupePersonnelDAO () {
+	private GroupePersonnelDAO() {
 
 	}
 
 
 	/**
 	 * @param nomFichier
-	 * @return
+	 * @return instance
 	 */
 	public static GroupePersonnelDAO getInstance(String nomFichier) {
 		if (instance == null) {
@@ -82,15 +81,13 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 	@Override
 	public GroupePersonnel find(String id) {
 
-		GroupePersonnel res = null ;
+		GroupePersonnel res = null;
 		if (id != null) {
 
-			if ( mapGroupePersonnels.containsKey(id)) {
+			if (mapGroupePersonnels.containsKey(id)) {
 				/**mise a jour de la table*/
-				res = mapGroupePersonnels.get(id) ;
-
+				res = mapGroupePersonnels.get(id);
 			}
-
 		}
 
 		return res;
@@ -102,13 +99,13 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 
 		String cle = getKeyGroupePersonnel(gpperso);
 
-		if ( mapGroupePersonnels.containsKey(cle)) {
+		if (mapGroupePersonnels.containsKey(cle)) {
 			/**mise a jour de la table*/
-			mapGroupePersonnels.replace(cle, gpperso) ;
+			mapGroupePersonnels.replace(cle, gpperso);
 		}
 		else {
 			/**mise a jour de la table*/
-			mapGroupePersonnels.put(cle, gpperso) ;
+			mapGroupePersonnels.put(cle, gpperso);
 		}
 		/**mise a jour du fichier*/
 		ecrireFichierGroupePersonnels();
@@ -125,7 +122,7 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 
 		if (cle != null) {
 
-			if ( mapGroupePersonnels.containsKey(cle)) {
+			if (mapGroupePersonnels.containsKey(cle)) {
 
 				/**mise a jour de la table*/
 				mapGroupePersonnels.remove(cle);
@@ -142,14 +139,14 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 	/**
 	 * Retourne la cle utilisee dans la table de hachage
 	 * @param gppersonnel
-	 * @return
+	 * @return res
 	 */
-	public static String getKeyGroupePersonnel (GroupePersonnel gppersonnel) {
+	public static String getKeyGroupePersonnel(GroupePersonnel gppersonnel) {
 
 		String res = new String("");
 
 		if (gppersonnel != null) {
-			res = gppersonnel.getFunction() ;
+			res = gppersonnel.getFunction();
 		}
 
 		return res; 
@@ -159,21 +156,21 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 
 	/**
 	 *  Lit le fichier des personnels
-	 * @return
+	 * @return gppersLus
 	 */
-	private static LinkedList<GroupePersonnel> lireFichierGroupePersonnels () {
+	private static LinkedList<GroupePersonnel> lireFichierGroupePersonnels() {
 
 		FileInputStream fis = null;
-		ObjectInputStream ois =null ;
+		ObjectInputStream ois = null;
 
-		LinkedList<GroupePersonnel> gppersLus = new LinkedList<GroupePersonnel>() ;
+		LinkedList<GroupePersonnel> gppersLus = new LinkedList<GroupePersonnel>();
 
-		File fichier =  new File(nomFichierGroupePersonnel) ;
+		File fichier = new File(nomFichierGroupePersonnel);
 
 		if (fichier.exists()) {
 			try {
 
-				fis = new FileInputStream( fichier);
+				fis = new FileInputStream(fichier);
 
 				/**ouverture d un flux sur un fichier*/
 				ois =  new ObjectInputStream(
@@ -182,13 +179,11 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 
 				/**deserialization de l objet*/
 				Object objetLu = null;
-				while ( (objetLu = ois.readObject()) != null) {
+				while ((objetLu = ois.readObject()) != null) {
 
 					if (objetLu instanceof GroupePersonnel) {
-						GroupePersonnel gppersonnel = (GroupePersonnel)objetLu ;
-
-						gppersLus.add(gppersonnel);
-
+						GroupePersonnel gppersonnel = (GroupePersonnel)objetLu;
+                        gppersLus.add(gppersonnel);
 					}
 				}
 
@@ -221,7 +216,7 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 			}
 		}
 
-		return gppersLus ;
+		return gppersLus;
 
 	}
 
@@ -229,18 +224,16 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 	/**
 	 * Initilisation de la Map des personnels
 	 */
-	private static void  initMapPersonnels () {
+	private static void initMapPersonnels() {
 
 		/**lecture du fichier ds personnels*/
 		LinkedList<GroupePersonnel> gppersLus = lireFichierGroupePersonnels();
 
 		if (gppersLus != null) {
 			for (GroupePersonnel gppersonnel : gppersLus) {
-				mapGroupePersonnels.put (getKeyGroupePersonnel(gppersonnel), gppersonnel);
+				mapGroupePersonnels.put(getKeyGroupePersonnel(gppersonnel), gppersonnel);
 			}
 		}
-
-
 	}
 
 
@@ -248,23 +241,22 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 	 * Ecriture du fichier des personnels
 	 * 
 	 */
-	private void ecrireFichierGroupePersonnels (){
+	private void ecrireFichierGroupePersonnels() {
 
-		ObjectOutputStream oos=null ;
+		ObjectOutputStream oos = null;
 		try {
 
 			FileOutputStream fos = new FileOutputStream(new File(nomFichierGroupePersonnel));
 
 			/**ouverture d un flux sur un fichier*/
-			oos =  new ObjectOutputStream(
+			oos = new ObjectOutputStream(
 					new BufferedOutputStream(
-							fos) );
-
+							fos));
 
 			/**serialization de l objet*/
 			if (!mapGroupePersonnels.isEmpty()) {
-				for ( GroupePersonnel gppersonnel :mapGroupePersonnels.values() ) {
-					oos.writeObject(gppersonnel) ;
+				for (GroupePersonnel gppersonnel : mapGroupePersonnels.values()) {
+					oos.writeObject(gppersonnel);
 				}
 			}
 
@@ -278,7 +270,6 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 			ex.printStackTrace();
 		}
 
-
 	}
 
 	
@@ -286,7 +277,7 @@ public class GroupePersonnelDAO extends DAO <GroupePersonnel> {
 	 * Affiche les personnels contenus dans le fichier
 	 * 
 	 */
-	public void afficheFichierGroupePersonnels () {
+	public void afficheFichierGroupePersonnels() {
 
 		/**lecture du fichier ds personnels*/
 		LinkedList<GroupePersonnel> gppersLus = lireFichierGroupePersonnels();
