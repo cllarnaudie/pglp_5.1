@@ -25,7 +25,7 @@ public  class GroupePersonnel  implements Serializable{
 
 
 	/**
-	 * Ajouter un personnel à la liste de personnel
+	 * Ajouter un personnel a la liste de personnel
 	 * @param personnel
 	 */
 	public void ajouter_personnel(Personnel personnel) {
@@ -34,8 +34,7 @@ public  class GroupePersonnel  implements Serializable{
 		}
 		else {
 			personnels.add(personnel); 
-			System.out.println ("La personne " + personnel.getPrenom() + " " + 
-					personnel.getNom() + " a ete ajoute de la liste \n"); 
+			
 		}
 	}
 
@@ -57,10 +56,10 @@ public  class GroupePersonnel  implements Serializable{
 		}
 	}
 
+
 	/**
 	 * Serialisation 
-	 * @param personne
-	 * @param fichier
+	 * @param nomFichier
 	 */
 	public void serialisationFichier ( String nomFichier) {
 
@@ -85,16 +84,17 @@ public  class GroupePersonnel  implements Serializable{
 
 		}
 		catch (IOException ex) {
-
+			
 			ex.printStackTrace();
 		}
 
 	}
 
+	
 	/**
 	 * Deserialisation
-	 *
-	 * @param fichier
+	 * @param nomFichier
+	 * @return
 	 */
 	public GroupePersonnel deserialisationFichier ( String  nomFichier) {
 		GroupePersonnel res = null;
@@ -125,6 +125,8 @@ public  class GroupePersonnel  implements Serializable{
 		return res ;
 	}
 
+
+	
 	public String  serialisationJson ( ) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -133,6 +135,7 @@ public  class GroupePersonnel  implements Serializable{
 		return jsonString;
 
 	}
+	
 	
 	/**
 	 * @param jsonString
@@ -151,15 +154,33 @@ public  class GroupePersonnel  implements Serializable{
 	
 	/**
 	 * Affiche les attributs de la classe
-	 */ 
+	 **/	 
 	public void afficheGroupePersonnel () {
 
 		for ( Personnel elt : personnels) {
 
 			elt.affichePersonnel();
+		
 		}
+	}
+	
+	
+	/**
+	 * Retourne la fonction du groupe
+	 * @return
+	 */
+	public String getFunction () {
+
+		String res = new String("");
+		
+		if ( (personnels != null) && (!personnels.isEmpty()) ) {
+			res = personnels.get(0).getFonction();
+		}
+		return res;
 	}
 
 
+
 }
+
 

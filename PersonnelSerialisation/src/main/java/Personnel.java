@@ -100,8 +100,8 @@ public final class Personnel implements Composant, Serializable{
 
 
 	/**
-	 * @param personne
-	 * @param fichier
+	 * Serialisation et ecriture dans le fichier
+	 * @param nomFichier
 	 */
 	public void serialisationFichier ( String nomFichier) {
 
@@ -133,8 +133,11 @@ public final class Personnel implements Composant, Serializable{
 	}
 	
 	
+	
 	/**
-	 * @param fichier
+	 * Deserialisation 
+	 * @param nomFichier
+	 * @return
 	 */
 	public Personnel deserialisationFichier ( String  nomFichier) {
 		Personnel res = null;
@@ -204,6 +207,7 @@ public final class Personnel implements Composant, Serializable{
 				System.out.println (numeroTelephone.get(i));
 			}
 		}	
+		System.out.println ("\n"); 
 	}	
 }
 
