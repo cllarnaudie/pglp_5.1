@@ -193,12 +193,13 @@ public class GroupePersonnelDAO extends DAO<GroupePersonnel> {
 
 			catch (EOFException ex) {
 
-
 			}
+			
 			catch (IOException ex) {
 
 				ex.printStackTrace();
 			}
+			
 			catch (ClassNotFoundException ex) {
 
 				ex.printStackTrace();
@@ -206,8 +207,12 @@ public class GroupePersonnelDAO extends DAO<GroupePersonnel> {
 
 			finally {
 				try {
-					ois.close();
-					fis.close();
+					if (ois != null) {
+						ois.close();
+					}
+					if (fis != null) {
+						fis.close();
+					}
 				}
 				catch (IOException ex) {
 
